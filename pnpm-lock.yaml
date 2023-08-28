@@ -8,6 +8,9 @@ dependencies:
   '@libsql/client':
     specifier: ^0.3.1
     version: 0.3.1
+  '@lucia-auth/adapter-sqlite':
+    specifier: ^2.0.0
+    version: 2.0.0(@libsql/client@0.3.1)(lucia@2.4.0)
   drizzle-orm:
     specifier: ^0.28.5
     version: 0.28.5(@libsql/client@0.3.1)
@@ -421,6 +424,22 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /@lucia-auth/adapter-sqlite@2.0.0(@libsql/client@0.3.1)(lucia@2.4.0):
+    resolution: {integrity: sha512-Hiy8WND/1mi25r0M2ruSml+Ab5GJLr4XZEHApYw1lxybF+VlPUyX7oTtIVCSgvq/SWiP/tvnyPwnXAPmNr8/bg==}
+    peerDependencies:
+      '@libsql/client': ^0.3.0
+      better-sqlite3: ^8.0.0
+      lucia: ^2.0.0
+    peerDependenciesMeta:
+      '@libsql/client':
+        optional: true
+      better-sqlite3:
+        optional: true
+    dependencies:
+      '@libsql/client': 0.3.1
+      lucia: 2.4.0
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
