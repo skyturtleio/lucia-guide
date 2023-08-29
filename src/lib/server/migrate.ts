@@ -1,17 +1,11 @@
 import { drizzle } from 'drizzle-orm/libsql';
 import { migrate } from 'drizzle-orm/libsql/migrator';
-import { createClient } from '@libsql/client';
+import { db } from './db';
 
 async function main() {
-	const db = drizzle(
-		createClient({
-			url: 'http://127.0.0.1:8080',
-		}),
-	);
-
 	console.log('Running migrations');
 
-	await migrate(db, { migrationsFolder: 'drizzle' });
+	await migrate(db, { migrationsFolder: '../../../migrations' });
 
 	console.log('Migrated successfully');
 

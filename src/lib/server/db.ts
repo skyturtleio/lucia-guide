@@ -1,8 +1,12 @@
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
-export const libsqlClient = createClient({
-	url: 'http://127.0.0.1:8080',
+/**
+ * This has *nothing* to do with Drizzle.
+ *
+ */
+export const client = createClient({
+	url: import.meta.env.DATABASE_URL,
 });
 
-export const db = drizzle(libsqlClient);
+export const db = drizzle(client);
