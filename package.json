@@ -34,6 +34,7 @@
 	"dependencies": {
 		"@libsql/client": "^0.3.1",
 		"@lucia-auth/adapter-sqlite": "^2.0.0",
+		"dotenv": "^16.3.1",
 		"drizzle-orm": "^0.28.5",
 		"lucia": "^2.4.0"
 	}
