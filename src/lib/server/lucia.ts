@@ -1,18 +1,27 @@
 import { lucia } from 'lucia';
-import { libsql } from '@lucia-auth/adapter-sqlite';
-import { libsqlClient } from './db';
-import { sveltekit } from 'lucia/middleware';
+import { client } from './database';
 import { dev } from '$app/environment';
+import { sveltekit } from 'lucia/middleware';
+import { libsql } from '@lucia-auth/adapter-sqlite';
 
-// expect error
+/**
+ * See Lucia docs for guidance on this.
+ * https://lucia-auth.com/getting-started/sveltekit
+ */
 export const auth = lucia({
-	adapter: libsql(libsqlClient, {
+	env: dev ? 'DEV' : 'PROD',
+	middleware: sveltekit(),
+	adapter: libsql(client, {
+		/**
+		 * Table names can be whatever you want for Lucia, but you
+		 * you need to make sure to specify it matches up here.
+		 * Lucia assumes `user`, `user_key`, `user_session` tables.
+		 * https://lucia-auth.com/basics/database
+		 */
 		user: 'user',
 		key: 'user_key',
 		session: 'user_session',
 	}),
-	env: dev ? 'DEV' : 'PROD',
-	middleware: sveltekit(),
 });
 
 export type Auth = typeof auth;
