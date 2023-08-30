@@ -20,6 +20,12 @@ export const auth = lucia({
 		key: 'user_key',
 		session: 'user_session',
 	}),
+	// Expose the user’s `username` to the User object by defining `getUserAttributes`
+	getUserAttributes: (data) => {
+		return {
+			username: data.username,
+		};
+	},
 });
 
 export type Auth = typeof auth;
