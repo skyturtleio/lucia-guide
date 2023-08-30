@@ -11,7 +11,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"generate": "drizzle-kit generate:sqlite",
-		"migrate": "pnpm exec tsx ./src/lib/server/migrate.ts"
+		"migrate": "pnpm exec tsx ./src/lib/server/migrate.ts",
+		"studio": "pnpm drizzle-kit studio"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
