@@ -1,16 +1,15 @@
 import { sqliteTable, text, blob } from 'drizzle-orm/sqlite-core';
 
+/** Database Model for Lucia
+ * https://lucia-auth.com/basics/database
+ * Lucia requires three tables to work:
+ * 	- User table
+ * 	- Session table
+ * 	- Key table
+ */
 export const user = sqliteTable('user', {
 	id: text('id').primaryKey(),
 	username: text('username', { length: 32 }).notNull().unique(),
-});
-
-export const key = sqliteTable('user_key', {
-	id: text('id').primaryKey(),
-	userId: text('user_id')
-		.notNull()
-		.references(() => user.id),
-	hashedPassword: text('hashed_password'),
 });
 
 export const session = sqliteTable('user_session', {
@@ -24,4 +23,12 @@ export const session = sqliteTable('user_session', {
 	idleExpires: blob('idle_expires', {
 		mode: 'bigint',
 	}).notNull(),
+});
+
+export const key = sqliteTable('user_key', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id),
+	hashedPassword: text('hashed_password'),
 });

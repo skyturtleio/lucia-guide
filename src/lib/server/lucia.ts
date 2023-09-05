@@ -9,8 +9,6 @@ import { libsql } from '@lucia-auth/adapter-sqlite';
  * https://lucia-auth.com/getting-started/sveltekit
  */
 export const auth = lucia({
-	env: dev ? 'DEV' : 'PROD',
-	middleware: sveltekit(),
 	adapter: libsql(client, {
 		// Table names can be whatever you want for Lucia, but you
 		// you need to make sure to specify it matches up here.
@@ -20,6 +18,8 @@ export const auth = lucia({
 		key: 'user_key',
 		session: 'user_session',
 	}),
+	middleware: sveltekit(),
+	env: dev ? 'DEV' : 'PROD',
 	// Expose the user’s `username` to the User object by defining `getUserAttributes`
 	getUserAttributes: (data) => {
 		return {
