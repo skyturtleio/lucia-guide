@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -13,3 +14,7 @@
 {/if}
 <p>User id: {data.userId}</p>
 <p>Username: {data.username}</p>
+
+<form method="POST" action="?/logout" use:enhance>
+	<button type="submit">Log out</button>
+</form>
