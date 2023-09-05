@@ -9,11 +9,11 @@
 <form method="POST" use:enhance>
 	<label for="username">
 		<span>Username</span>
-		<input name="username" id="username" type="text" /><br />
+		<input name="username" id="username" type="text" />
 	</label>
 	<label for="password">
 		<span>Password</span>
-		<input name="password" id="password" type="password" /><br />
+		<input name="password" id="password" type="password" />
 	</label>
 	<button type="submit">Submit</button>
 </form>
@@ -21,4 +21,4 @@
 {#if form?.message}
 	<p class="error">{form.message}</p>
 {/if}
-<a href="/login">Sign in</a>
+<a href="/login">Already have an account? Sign in</a>
