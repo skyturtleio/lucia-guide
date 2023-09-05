@@ -11,6 +11,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions: Actions = {
 	default: async ({ request, locals }) => {
+		console.log(request.body);
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
@@ -29,10 +30,18 @@ export const actions: Actions = {
 
 		try {
 			const user = await auth.createUser({
+				/** Lucia Keys
+				 * https://lucia-auth.com/basics/keys
+				 * A user can have any number of keys, allowing for multiple ways of referencing and
+				 * authenticating users without cramming your user table.
+				 */
 				key: {
-					// Auth method
+					// `providerId` - the identifier for the authentication method, e.g. "email", "github", "username"
 					providerId: 'username',
-					// Unique id when using `username` auth method
+					// `providerUserId` - the unique `id` for a user within the provider from `providerId` above.
+					// This gives this user a unique identifier from the specific method above. So,
+					// that means, we can reference this *same* user and authenticate them through
+					// email, or their Github account, or a username.
 					providerUserId: username.toLowerCase(),
 					// Password is hashed by Lucia (no need for bcrypt)
 					password,
@@ -42,6 +51,9 @@ export const actions: Actions = {
 				},
 			});
 
+			// After successfully creating a user, create a sessions with `Auth.createSession()` and
+			// store it as a cookie with `AuthRequest.setSession()`. `AuthRequest` is accessible as
+			// `locals.auth` through the `handle` hook in `src/hooks.server.ts`.
 			const session = await auth.createSession({
 				userId: user.userId,
 				attributes: {},
