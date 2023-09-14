@@ -11,6 +11,10 @@
 		<span>Username</span>
 		<input name="username" id="username" type="text" />
 	</label>
+	<label for="email">
+		<span>Username</span>
+		<input name="email" id="email" type="text" />
+	</label>
 	<label for="password">
 		<span>Password</span>
 		<input name="password" id="password" type="password" />
