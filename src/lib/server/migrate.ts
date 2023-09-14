@@ -3,7 +3,7 @@ import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import { migrate } from 'drizzle-orm/libsql/migrator';
 
-async function main() {
+async function runMigrations() {
 	const db = drizzle(
 		createClient({
 			url: process.env.DATABASE_URL || '',
@@ -26,7 +26,7 @@ async function main() {
 	process.exit(0);
 }
 
-main().catch((e) => {
+runMigrations().catch((e) => {
 	console.error('Migration failed');
 	console.error(e);
 	process.exit(1);
