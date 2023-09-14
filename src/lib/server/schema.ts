@@ -1,4 +1,4 @@
-import { sqliteTable, text, blob } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, blob, integer } from 'drizzle-orm/sqlite-core';
 
 /** Database Model for Lucia
  * https://lucia-auth.com/basics/database
@@ -10,6 +10,8 @@ import { sqliteTable, text, blob } from 'drizzle-orm/sqlite-core';
 export const user = sqliteTable('user', {
 	id: text('id').primaryKey(),
 	username: text('username', { length: 32 }).notNull().unique(),
+	email: text('email', { length: 32 }).notNull().unique(),
+	emailVerified: integer('email_verified', { mode: 'boolean' }).default(false).notNull(),
 });
 
 export const session = sqliteTable('user_session', {
