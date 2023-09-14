@@ -17,6 +17,8 @@ declare global {
 		type Auth = import('$lib/server/lucia').Auth;
 		type DatabaseUserAttributes = {
 			username: string;
+			email: string;
+			email_verified: boolean;
 		};
 		// eslint-disable-next-line @typescript-eslint/ban-types
 		type DatabaseSessionAttributes = {};
