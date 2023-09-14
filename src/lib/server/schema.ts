@@ -1,6 +1,7 @@
 import { sqliteTable, text, blob, integer } from 'drizzle-orm/sqlite-core';
 
-/** Database Model for Lucia
+/**
+ * Database Model for Lucia
  * https://lucia-auth.com/basics/database
  * Lucia requires three tables to work:
  * 	- User table
@@ -14,6 +15,12 @@ export const user = sqliteTable('user', {
 	emailVerified: integer('email_verified', { mode: 'boolean' }).default(false).notNull(),
 });
 
+/**
+ * camelCase versus snake_case
+ * You'll notice that when defining the schema, the property name
+ * is camel cased and refers to a column name that is snake cased.
+ * This is how they do it on the example docs
+ */
 export const session = sqliteTable('user_session', {
 	id: text('id').primaryKey(),
 	userId: text('user_id')

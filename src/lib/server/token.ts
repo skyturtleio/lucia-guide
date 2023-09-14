@@ -1,17 +1,17 @@
 import { db } from './database';
 import { eq } from 'drizzle-orm';
 import { generateRandomString, isWithinExpiration } from 'lucia/utils';
-import { emailVerificationToken, user } from './schema';
+import * as schema from './schema';
 
 const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours
 
-export const generateEmailVerificationToken = async (userId: string) => {
+export const generateEmailVerificationToken = async (userIdOther: string) => {
 	const storedUserTokens = await db
 		.select({
-			token: emailVerificationToken,
+			token: schema.emailVerificationToken,
 		})
-		.from(emailVerificationToken)
-		.where(eq(user.id, userId));
+		.from(schema.emailVerificationToken)
+		.where(eq(schema.user.id, userIdOther));
 
 	if (storedUserTokens.length > 0) {
 		const reusableStoredToken = storedUserTokens.find((t) => {
@@ -21,4 +21,11 @@ export const generateEmailVerificationToken = async (userId: string) => {
 	}
 
 	const token = generateRandomString(63);
+	await db.insert(schema.emailVerificationToken).values({
+		id: token,
+		userId: userIdOther,
+		expires: BigInt(new Date().getTime() + EXPIRES_IN),
+	});
+
+	return token;
 };
