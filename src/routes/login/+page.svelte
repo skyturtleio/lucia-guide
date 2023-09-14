@@ -5,9 +5,9 @@
 <h1>Sign In</h1>
 
 <form method="POST" use:enhance>
-	<label for="username">
-		<span>Username</span>
-		<input name="username" id="username" />
+	<label for="email">
+		<span>Email</span>
+		<input name="email" id="email" />
 	</label>
 	<label for="password">
 		<span>Password</span>
