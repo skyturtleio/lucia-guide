@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
+import * as schema from './schema';
 
 /**
  * This is from `libsql`. It has *nothing* to do with Drizzle or
@@ -10,4 +11,4 @@ export const client = createClient({
 	url: process.env.DATABASE_URL || '',
 });
 
-export const db = drizzle(client);
+export const db = drizzle(client, { schema });
