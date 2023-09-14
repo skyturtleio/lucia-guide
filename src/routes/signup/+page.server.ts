@@ -106,6 +106,9 @@ export const actions: Actions = {
 			});
 
 			locals.auth.setSession(session); // Set session cookie using SvelteKit `locals`
+
+			const token = await generateEmailVerificationToken(user.userId);
+			await sendEmailVerificationLink(token);
 		} catch (e) {
 			const USER_TABLE_UNIQUE_CONSTRAINT_ERROR =
 				'LibsqlError: SQLITE_CONSTRAINT: SQLite error: UNIQUE constraint failed: user.username';
