@@ -12,7 +12,7 @@
 		<input name="username" id="username" type="text" />
 	</label>
 	<label for="email">
-		<span>Username</span>
+		<span>Email</span>
 		<input name="email" id="email" type="text" />
 	</label>
 	<label for="password">
