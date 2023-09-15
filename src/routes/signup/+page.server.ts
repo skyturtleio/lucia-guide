@@ -93,7 +93,7 @@ export const actions: Actions = {
 			| created a key at all with `createUser` and created the keys separately.
 			|
 			*/
-			const emailKey = await auth.createKey({
+			await auth.createKey({
 				userId: user.userId,
 				providerId: 'email',
 				providerUserId: email.toLowerCase(),
