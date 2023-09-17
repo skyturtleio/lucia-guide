@@ -7,17 +7,31 @@ import type { Actions, PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth.validate();
 	if (!session) throw redirect(302, '/login');
-	if (!session.user.emailVerified) {
+	if (session.user.emailVerified) {
 		throw redirect(302, '/');
 	}
-	return {};
+	return {
+		userId: session.user.userId,
+		email: session.user.email,
+		verified: session.user.emailVerified,
+	};
 };
 
 export const actions: Actions = {
-	default: async ({ locals }) => {
+	sendconsole: async ({ locals }) => {
 		const session = await locals.auth.validate();
 		if (!session) throw redirect(302, '/login');
-		if (!session.user.emailVerified) {
+		if (session.user.emailVerified) {
+			throw redirect(302, '/');
+		}
+		const token = await generateEmailVerificationToken(session.user.userId);
+
+		console.log(`test token: ${token}`);
+	},
+	resend: async ({ locals }) => {
+		const session = await locals.auth.validate();
+		if (!session) throw redirect(302, '/login');
+		if (session.user.emailVerified) {
 			throw redirect(302, '/');
 		}
 

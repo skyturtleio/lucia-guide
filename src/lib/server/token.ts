@@ -9,12 +9,20 @@ import { generateRandomString, isWithinExpiration } from 'lucia/utils';
 const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours
 
 export const generateEmailVerificationToken = async (userId: string) => {
+	console.log('entering generateEmailVerificationToken');
 	const storedUserTokens = await db
 		.select({
 			token: schema.emailVerificationToken,
 		})
 		.from(schema.emailVerificationToken)
-		.where(eq(schema.user.id, userId));
+		.where(eq(schema.emailVerificationToken.userId, userId));
+	/**
+	 * MISTAKE I MADE
+	 * At first I had `.where(eq(schema.user.id, userId));`
+	 * I was received an error something like `column user.id does not exist`
+	 * I was supposed to be checking the userId column
+	 * in the *emailVerificationToken* table, NOT the `user` table
+	 */
 
 	if (storedUserTokens.length > 0) {
 		const reusableStoredToken = storedUserTokens.find((t) => {
