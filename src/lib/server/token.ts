@@ -9,7 +9,6 @@ import { generateRandomString, isWithinExpiration } from 'lucia/utils';
 const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours
 
 export const generateEmailVerificationToken = async (userId: string) => {
-	console.log('entering generateEmailVerificationToken');
 	const storedUserTokens = await db
 		.select({
 			token: schema.emailVerificationToken,
@@ -48,7 +47,9 @@ export const validateEmailVerificationToken = async (token: string) => {
 		});
 		if (!storedToken) throw new Error('Invalid token');
 
-		await tx.delete(schema.emailVerificationToken).where(eq(schema.user.id, storedToken.userId));
+		await tx
+			.delete(schema.emailVerificationToken)
+			.where(eq(schema.emailVerificationToken.userId, storedToken.userId));
 
 		return storedToken;
 	});
