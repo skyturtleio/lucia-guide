@@ -10,7 +10,6 @@ const startupCode = () => {
 startupCode();
 
 export const handle: Handle = async ({ event, resolve }) => {
-	console.log('server hook: I run every time');
 	event.locals.auth = auth.handleRequest(event);
 	return await resolve(event);
 };
