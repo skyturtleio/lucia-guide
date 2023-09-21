@@ -22,4 +22,6 @@
 {#if form?.message}
 	<p class="error">{form.message}</p>
 {/if}
-<a href="/signup">Don't have an account? Sign up</a>
+
+<p>Don't have an account? <a href="/signup">Sign up</a></p>
+<p>Signed up with a username? <a href="/login-username">Use username</a></p>

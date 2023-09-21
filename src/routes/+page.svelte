@@ -15,6 +15,7 @@
 <p>User id: {data.userId}</p>
 <p>Username: {data.username}</p>
 <p>Email: {data.email}</p>
+<p>Repo Email: {data.repoEmail}</p>
 
 <form method="POST" action="?/logout" use:enhance>
 	<button type="submit">Log out</button>
