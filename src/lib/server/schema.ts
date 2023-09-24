@@ -1,3 +1,4 @@
+import { bigint } from 'drizzle-orm/mysql-core';
 import { sqliteTable, text, blob, integer } from 'drizzle-orm/sqlite-core';
 
 /**
@@ -50,4 +51,14 @@ export const emailVerificationToken = sqliteTable('email_verification_token', {
 	expires: blob('expires', {
 		mode: 'bigint',
 	}).notNull(),
+});
+
+export const passwordResetToken = sqliteTable('password_reset_token', {
+	id: text('id').primaryKey(),
+	expires: blob('expires', {
+		mode: 'bigint',
+	}).notNull(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id),
 });
