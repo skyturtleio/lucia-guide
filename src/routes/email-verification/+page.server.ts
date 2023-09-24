@@ -18,16 +18,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-	sendconsole: async ({ locals }) => {
-		const session = await locals.auth.validate();
-		if (!session) throw redirect(302, '/login');
-		if (session.user.emailVerified) {
-			throw redirect(302, '/');
-		}
-		const token = await generateEmailVerificationToken(session.user.userId);
-
-		console.log(`test token: ${token}`);
-	},
 	resend: async ({ locals }) => {
 		const session = await locals.auth.validate();
 		if (!session) throw redirect(302, '/login');

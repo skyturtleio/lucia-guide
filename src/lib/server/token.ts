@@ -9,10 +9,9 @@ import { generateRandomString, isWithinExpiration } from 'lucia/utils';
 const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours
 
 export const generateEmailVerificationToken = async (userId: string) => {
+	console.log('inside generateemail verification token');
 	const storedUserTokens = await db
-		.select({
-			token: schema.emailVerificationToken,
-		})
+		.select()
 		.from(schema.emailVerificationToken)
 		.where(eq(schema.emailVerificationToken.userId, userId));
 	/**
@@ -24,10 +23,10 @@ export const generateEmailVerificationToken = async (userId: string) => {
 	 */
 
 	if (storedUserTokens.length > 0) {
-		const reusableStoredToken = storedUserTokens.find((t) => {
-			return isWithinExpiration(Number(t.token.expires) - EXPIRES_IN / 2);
+		const reusableStoredToken = storedUserTokens.find((token) => {
+			return isWithinExpiration(Number(token.expires) - EXPIRES_IN / 2);
 		});
-		if (reusableStoredToken) return reusableStoredToken.token.id;
+		if (reusableStoredToken) return reusableStoredToken.id;
 	}
 
 	const token = generateRandomString(63);

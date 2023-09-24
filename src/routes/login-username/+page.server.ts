@@ -1,6 +1,7 @@
 import { auth } from '$lib/server/lucia';
 import { LuciaError } from 'lucia';
 import { fail, redirect } from '@sveltejs/kit';
+import * as schema from '$lib/server/schema';
 
 import type { Actions, PageServerLoad } from './$types';
 import { getEmailByUsername } from '$lib/server/repo';
