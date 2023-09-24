@@ -60,3 +60,46 @@ export const validateEmailVerificationToken = async (token: string) => {
 
 	return storedToken.userId;
 };
+
+export const generatePasswordResetToken = async (userId: string) => {
+	const storedUserTokens = await db
+		.select()
+		.from(schema.passwordResetToken)
+		.where(eq(schema.passwordResetToken.userId, userId));
+
+	if (storedUserTokens.length > 0) {
+		const reusableStoredToken = storedUserTokens.find((token) => {
+			return isWithinExpiration(Number(token.expires) - EXPIRES_IN / 2);
+		});
+		if (reusableStoredToken) return reusableStoredToken.id;
+	}
+
+	const token = generateRandomString(63);
+	await db.insert(schema.passwordResetToken).values({
+		id: token,
+		expires: BigInt(new Date().getTime() + EXPIRES_IN),
+		userId,
+	});
+
+	return token;
+};
+
+export const validatePasswordResetToken = async (token: string) => {
+	const storedToken = await db.transaction(async (tx) => {
+		const storedToken = await tx.query.passwordResetToken.findFirst({
+			where: eq(schema.passwordResetToken.id, token),
+		});
+		if (!storedToken) throw new Error('invalid token');
+		await tx
+			.delete(schema.passwordResetToken)
+			.where(eq(schema.passwordResetToken.id, storedToken.id));
+
+		return storedToken;
+	});
+
+	const tokenExpires = Number(storedToken.expires);
+	if (!isWithinExpiration(tokenExpires)) {
+		throw new Error('expired token');
+	}
+	return storedToken.userId;
+};
