@@ -58,6 +58,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.5.2
     version: 3.5.2(postcss@8.4.30)(svelte@4.2.1)
+  sveltekit-adapter-deno:
+    specifier: ^0.11.2
+    version: 0.11.2(@sveltejs/kit@1.25.0)
   tslib:
     specifier: ^2.6.2
     version: 2.6.2
@@ -2488,6 +2491,15 @@ packages:
       locate-character: 3.0.0
       magic-string: 0.30.3
       periscopic: 3.1.0
+    dev: true
+
+  /sveltekit-adapter-deno@0.11.2(@sveltejs/kit@1.25.0):
+    resolution: {integrity: sha512-QkT0yRtH7Hl8E9GzuOgbupjGmI4HOapr5YlXn3qKtmx8qy2BpTDMIUSVBbPXuuq1Lfk2MhlnyUtRIEUKsM4b1Q==}
+    peerDependencies:
+      '@sveltejs/kit': ^1.0.0
+    dependencies:
+      '@sveltejs/kit': 1.25.0(svelte@4.2.1)(vite@4.4.9)
+      esbuild: 0.18.20
     dev: true
 
   /tar-fs@2.1.1:
