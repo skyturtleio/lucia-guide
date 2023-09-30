@@ -26,7 +26,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 20.x
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -56,6 +56,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: 'logbook-mvp1'
-          entrypoint: 'index.js' # 📝 Update the entrypoint if necessary
+          project: 'lucia-guide'
+          entrypoint: 'mod.ts' # 📝 Update the entrypoint if necessary
           root: 'build' # 📝 Update the root if necessary
