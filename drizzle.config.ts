@@ -4,9 +4,9 @@ import 'dotenv/config';
 export default {
 	schema: './src/lib/server/schema.ts',
 	out: './migrations',
-	driver: 'libsql',
+	driver: 'turso',
+	breakpoints: true,
 	dbCredentials: {
 		url: process.env.DATABASE_URL || '',
 	},
-	breakpoints: true,
 } satisfies Config;

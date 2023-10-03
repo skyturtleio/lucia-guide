@@ -12,6 +12,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (!session.user.emailVerified) {
 		throw redirect(302, '/email-verification');
 	}
+	console.log(import.meta.env.VITE_MY_ENV);
 
 	return {
 		userId: session.user.userId,

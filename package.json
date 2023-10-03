@@ -12,7 +12,7 @@
     "format": "prettier --plugin-search-dir . --write .",
     "drizzle:generate": "drizzle-kit generate:sqlite",
     "drizzle:migrate": "pnpm exec tsx ./src/lib/server/migrate.ts",
-    "studio": "pnpm drizzle-kit studio"
+    "drizzle:studio": "pnpm drizzle-kit studio"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.1.0",
