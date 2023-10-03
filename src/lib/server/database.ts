@@ -9,8 +9,8 @@ import { env } from '$env/dynamic/private';
  * Turso. Turso just happens to be compatible with `libsql`.
  */
 export const client = createClient({
-	url: env.DB_URL || '',
-	authToken: env.DB_AUTH_TOKEN || '',
+	url: env.DB_URL,
+	authToken: env.DB_AUTH_TOKEN,
 });
 
 /**
