@@ -7,6 +7,7 @@ export default {
 	driver: 'turso',
 	breakpoints: true,
 	dbCredentials: {
-		url: process.env.DATABASE_URL || '',
+		url: process.env.DB_URL || '',
+		authToken: process.env.DB_AUTH_TOKEN || '',
 	},
 } satisfies Config;
