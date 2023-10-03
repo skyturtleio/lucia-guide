@@ -1,4 +1,3 @@
-import { bigint } from 'drizzle-orm/mysql-core';
 import { sqliteTable, text, blob, integer } from 'drizzle-orm/sqlite-core';
 
 /**
