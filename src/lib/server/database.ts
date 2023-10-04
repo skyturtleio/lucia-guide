@@ -2,15 +2,14 @@ import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import * as schema from './schema';
-import { env } from '$env/dynamic/private';
 
 /**
  * This is from `libsql`. It has *nothing* to do with Drizzle or
  * Turso. Turso just happens to be compatible with `libsql`.
  */
 export const client = createClient({
-	url: env.DB_URL,
-	authToken: env.DB_AUTH_TOKEN,
+	url: Deno.env.get('DB_URL'),
+	authToken: Deno.env.get('DB_AUTH_TOKEN'),
 });
 
 /**
