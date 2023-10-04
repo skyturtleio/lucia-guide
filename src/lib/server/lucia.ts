@@ -1,8 +1,11 @@
 import { lucia } from 'lucia';
 import { client } from './database';
-import { dev } from '$app/environment';
 import { sveltekit } from 'lucia/middleware';
 import { libsql } from '@lucia-auth/adapter-sqlite';
+import 'dotenv/config';
+
+const currentEnvironment = process.env.NODE_ENV;
+const devMode = currentEnvironment !== 'PROD' ? 'DEV' : 'PROD';
 
 /**
  * See Lucia docs for guidance on this.
@@ -19,7 +22,7 @@ export const auth = lucia({
 		session: 'user_session',
 	}),
 	middleware: sveltekit(),
-	env: dev ? 'DEV' : 'PROD',
+	env: devMode,
 	// Expose the user’s `username` to the User object by defining `getUserAttributes`
 	getUserAttributes: (data) => {
 		return {

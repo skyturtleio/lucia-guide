@@ -54,6 +54,7 @@ jobs:
         env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_AUTH_TOKEN: ${{ secrets.DB_AUTH_TOKEN }}
+          NODE_ENV: ${{ vars.NODE_ENV }}
         run: pnpm build # 📝 Update the build command(s) if necessary
 
       - name: Upload to Deno Deploy
