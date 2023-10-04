@@ -2,9 +2,9 @@ import { lucia } from 'lucia';
 import { client } from './database';
 import { sveltekit } from 'lucia/middleware';
 import { libsql } from '@lucia-auth/adapter-sqlite';
-import 'dotenv/config';
+import { env } from '$env/dynamic/private';
 
-const currentEnvironment = process.env.NODE_ENV;
+const currentEnvironment = env.NODE_ENV;
 const devMode = currentEnvironment !== 'PROD' ? 'DEV' : 'PROD';
 
 /**
