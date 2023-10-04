@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 import * as schema from './schema';
-import { env } from '$env/dynamic/private';
+import { env } from '$env/static/private';
 
 /**
  * This is from `libsql`. It has *nothing* to do with Drizzle or
