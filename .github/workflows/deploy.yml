@@ -51,6 +51,9 @@ jobs:
         run: pnpm install
 
       - name: Build step
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_AUTH_TOKEN: ${{ secrets.DB_AUTH_TOKEN }}
         run: pnpm build # 📝 Update the build command(s) if necessary
 
       - name: Upload to Deno Deploy
